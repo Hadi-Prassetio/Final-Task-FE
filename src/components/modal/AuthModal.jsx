@@ -26,6 +26,7 @@ export default function AuthModal() {
   return (
     <>
       <Button
+        id='loginButton'
         className='me-3'
         style={{
           color: "#613D2B",

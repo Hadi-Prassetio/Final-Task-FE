@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import Pin from "../assets/pin.png";
 
 import NavAdmin from "../components/NavAdmin";
-import Product1 from "../assets/product1.png";
+import { useParams, useNavigate } from "react-router-dom";
+import Products from "../datadummies/Products";
 import { API } from "../config/api";
-import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "react-query";
 
-function AddProduct() {
+function UpdateProduct() {
   const [preview, setPreview] = useState(null); //For image preview
+  const [product, setProduct] = useState({}); //Store product data
+  const [dataproduct, setDataproduct] = useState([]);
   let navigate = useNavigate();
+
+  const { id } = useParams();
 
   const [form, setForm] = useState({
     name: "",
@@ -19,6 +23,33 @@ function AddProduct() {
     description: "",
     image: "",
   }); //Store product data
+
+  useEffect(() => {
+    const dataproduct = async () => {
+      try {
+        const response = await API.get("/product/" + id);
+        setForm({
+          name: response.data.data.name,
+
+          stock: response.data.data.stock,
+
+          price: response.data.data.price,
+
+          description: response.data.data.description,
+
+          image: response.data.data.image,
+        });
+
+        setDataproduct(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    dataproduct();
+  }, [setDataproduct]);
+
+  console.log(id);
+  console.log(form);
 
   const handleChange = (e) => {
     setForm({
@@ -47,16 +78,20 @@ function AddProduct() {
 
       // Store data with FormData as object
       const formData = new FormData();
+
+      if (form.image) {
+        formData.set("image", form?.image[0], form?.image[0]?.name);
+      }
+
       formData.set("name", form.name);
       formData.set("stock", form.stock);
       formData.set("price", form.price);
       formData.set("description", form.description);
-      formData.set("image", form.image[0], form.image[0].name);
 
       // Configuration
 
       // Insert product data
-      const response = await API.post("/product", formData, config);
+      const response = await API.patch("/product/" + dataproduct.id, formData);
       navigate("/list-products");
     } catch (error) {
       console.log(error);
@@ -81,6 +116,7 @@ function AddProduct() {
                     name='name'
                     id='name'
                     placeholder='Name Product'
+                    value={form.name}
                     onChange={handleChange}
                     style={{
                       width: "100%",
@@ -95,10 +131,11 @@ function AddProduct() {
                   <input
                     className='mb-5 pt-2 pb-2 ps-1'
                     type='text'
+                    placeholder='Stock'
                     name='stock'
                     id='stock'
-                    placeholder='Stock'
                     onChange={handleChange}
+                    value={form.stock}
                     style={{
                       width: "100%",
                       borderRadius: "5px",
@@ -112,10 +149,11 @@ function AddProduct() {
                   <input
                     className='mb-5 pt-2 pb-2 ps-1'
                     type='text'
+                    placeholder='Price'
                     name='price'
                     id='price'
-                    placeholder='Price'
                     onChange={handleChange}
+                    value={form.price}
                     style={{
                       width: "100%",
                       borderRadius: "5px",
@@ -128,10 +166,11 @@ function AddProduct() {
                 <Col>
                   <textarea
                     className='mb-5 pt-2 pb-2 ps-1'
+                    placeholder='Description'
                     name='description'
                     id='description'
-                    placeholder='Description'
                     onChange={handleChange}
+                    value={form.description}
                     style={{
                       width: "100%",
                       borderRadius: "5px",
@@ -158,10 +197,10 @@ function AddProduct() {
                   <input
                     className='mb-5 pt-2 pb-2 ps-1'
                     type='file'
-                    name='image'
                     id='image'
                     placeholder='Photo Product'
                     onChange={handleChange}
+                    name='image'
                     hidden
                   />
                 </Col>
@@ -176,18 +215,26 @@ function AddProduct() {
                       color: "white",
                       borderColor: "#613D2B",
                     }}>
-                    Add Product
+                    Update Product
                   </button>
                 </Col>
               </form>
             </Col>
             <Col md={5}>
-              {preview && (
-                <img
-                  src={preview}
-                  alt=''
-                  style={{ width: "100%", borderRadius: "5px" }}
-                />
+              {!preview ? (
+                <div>
+                  <img
+                    src={form.image}
+                    style={{ width: "100%", borderRadius: "5px" }}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <img
+                    src={preview}
+                    style={{ width: "100%", borderRadius: "5px" }}
+                  />
+                </div>
               )}
             </Col>
           </Row>
@@ -197,4 +244,4 @@ function AddProduct() {
   );
 }
 
-export default AddProduct;
+export default UpdateProduct;

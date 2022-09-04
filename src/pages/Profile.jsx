@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import NavUser from "../components/NavUser";
 import User from "../assets/user.png";
 import Transaction from "../components/Transaction";
+import { Usercontext } from "../context/userContext";
 
 export default function Profile() {
+  const [user, setUser] = React.useContext(Usercontext);
+
   return (
     <div>
       <NavUser />
@@ -30,12 +33,12 @@ export default function Profile() {
                   <Col sm={6}>
                     <div>
                       <h3 style={{ color: "#613D2B" }}>Full Name</h3>
-                      <p>Hadi Prassetio</p>
+                      <p>{user.user.fullname}</p>
                     </div>
 
                     <div className='mt-4'>
                       <h3 style={{ color: "#613D2B" }}>Email</h3>
-                      <p>hadi@mail.com</p>
+                      <p>{user.user.email}</p>
                     </div>
                   </Col>
                 </Row>

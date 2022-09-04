@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navbar, Container, Dropdown, Col, Row } from "react-bootstrap";
 import Logo from "../assets/Icon.png";
 import User from "../assets/user.png";
@@ -6,9 +6,21 @@ import Profile from "../assets/profile.png";
 import LogOut from "../assets/logout.png";
 import Cart from "../assets/cart.png";
 import { useNavigate } from "react-router-dom";
+import { Usercontext } from "../context/userContext";
 
 export default function NavUser() {
   const navigate = useNavigate();
+
+  const [state, dispatch] = useContext(Usercontext);
+
+  const handleLogout = () => {
+    console.log(state);
+    dispatch({
+      type: "LOGOUT",
+    });
+    navigate("/");
+  };
+
   const movetoHome = () => {
     navigate("/");
   };
@@ -59,7 +71,7 @@ export default function NavUser() {
                     </Dropdown.Item>
                     <hr />
                     <Dropdown.Item>
-                      <img src={LogOut} alt='' /> Log Out
+                      <img src={LogOut} alt='' onClick={handleLogout} /> Log Out
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

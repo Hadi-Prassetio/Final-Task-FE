@@ -1,24 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navbar, Container, Dropdown, Col, Row } from "react-bootstrap";
 import Logo from "../assets/Icon.png";
 import User from "../assets/user.png";
 import Add from "../assets/beans.png";
 import LogOut from "../assets/logout.png";
 import { useNavigate } from "react-router-dom";
+import { Usercontext } from "../context/userContext";
 
 export default function NavAdmin() {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const [state, dispatch] = useContext(Usercontext);
+
+  const handleLogout = () => {
+    console.log(state);
+    dispatch({
+      type: "LOGOUT",
+    });
+    navigate("/");
+  };
 
   const movetoAddProduct = () => {
-    Navigate("/add-product");
+    navigate("/add-product");
   };
 
   const movetoAdmin = () => {
-    Navigate("/admin");
+    navigate("/admin");
   };
 
   const movetoList = () => {
-    Navigate("/list-products");
+    navigate("/list-products");
   };
 
   return (
@@ -56,7 +67,7 @@ export default function NavAdmin() {
                     </Dropdown.Item>
                     <hr />
                     <Dropdown.Item>
-                      <img src={LogOut} alt='' /> Log Out
+                      <img src={LogOut} alt='' onClick={handleLogout} /> Log Out
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
