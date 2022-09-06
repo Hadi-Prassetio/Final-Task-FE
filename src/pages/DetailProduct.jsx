@@ -1,10 +1,10 @@
 import { React, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Products from "../datadummies/Products.jsx";
 import NavUser from "../components/NavUser.jsx";
 import { Container, Card, Col, Row } from "react-bootstrap";
 import { API } from "../config/api";
 import convertRupiah from "rupiah-format";
+import { useQuery, useMutation } from "react-query";
 
 export default function DetailProduct() {
   let navigate = useNavigate();
@@ -25,48 +25,48 @@ export default function DetailProduct() {
   }, []);
 
   // Check Transaction
-  // const [transaction, setTransaction] = useState();
-  // const getTrans = async () => {
-  //   try {
-  //     let response = await API.get("/transaction-status");
-  //     setTransaction(response.data.data);
-  //   } catch (e) {
-  //     console.log(e.message);
-  //   }
-  // };
+  const [transaction, setTransaction] = useState();
+  const getTrans = async () => {
+    try {
+      let response = await API.get("/transaction-status");
+      setTransaction(response.data.data);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
-  // useEffect(() => {
-  //   getTrans();
-  // }, []);
+  useEffect(() => {
+    getTrans();
+  }, []);
 
-  // console.log(transaction);
+  console.log(transaction);
 
   // Handle for Add to cart
-  // const handleAddToCart = useMutation(async (e) => {
-  //   try {
-  //     e.preventDefault();
+  const handleAddToCart = useMutation(async (e) => {
+    try {
+      e.preventDefault();
 
-  //     const config = {
-  //       headers: {
-  //         "Content-type": "application/json",
-  //       },
-  //     };
-  //     await API.post("/transaction", config);
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      await API.post("/transaction", config);
 
-  //     const data = {
-  //       product_id: product.id,
-  //       qty: 1,
-  //       sub_amount: product.price,
-  //     };
+      const data = {
+        product_id: product.id,
+        qty: 1,
+        sub_amount: product.price,
+      };
 
-  //     const body = JSON.stringify(data);
+      const body = JSON.stringify(data);
 
-  //     await API.post("/cart", body, config);
-  //     navigate("/");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // });
+      await API.post("/cart", body, config);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
   return (
     <div>
@@ -91,7 +91,9 @@ export default function DetailProduct() {
                 padding: "5px 10px",
                 border: "none",
                 borderRadius: "5px",
-              }}>
+              }}
+              type='submit'
+              onClick={(e) => handleAddToCart.mutate(e)}>
               Add Cart
             </button>
           </Col>

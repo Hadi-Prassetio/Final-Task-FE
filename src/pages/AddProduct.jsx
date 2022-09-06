@@ -3,7 +3,6 @@ import { Container, Col, Row } from "react-bootstrap";
 import Pin from "../assets/pin.png";
 
 import NavAdmin from "../components/NavAdmin";
-import Product1 from "../assets/product1.png";
 import { API } from "../config/api";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";

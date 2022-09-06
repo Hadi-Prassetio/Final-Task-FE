@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import NavUser from "../components/NavUser";
 import User from "../assets/user.png";
-import Transaction from "../components/Transaction";
 import { Usercontext } from "../context/userContext";
+import Transaction from "../components/Transaction";
 
 export default function Profile() {
   const [user, setUser] = React.useContext(Usercontext);
@@ -49,7 +49,9 @@ export default function Profile() {
             <h2 className='mb-4' style={{ color: "#613D2B" }}>
               My Transaction
             </h2>
-            <Transaction />
+            <div className=''>
+              <Transaction />
+            </div>
           </Col>
         </Row>
       </Container>

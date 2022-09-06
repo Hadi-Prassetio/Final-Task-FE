@@ -1,20 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Col, Row, Table, Button } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import convertRupiah from "rupiah-format";
-import Products from "../datadummies/Products";
 import { API } from "../config/api";
-import { useQuery } from "react-query";
-import { Usercontext } from "../context/userContext";
 import { useMutation } from "react-query";
 
 import NavAdmin from "../components/NavAdmin";
 import DeleteData from "../components/modal/DeleteData";
 
 function ListProduct() {
-  const [state, dispatch] = useContext(Usercontext);
-  const [user, setUser] = React.useContext(Usercontext);
-
   const [idDelete, setIdDelete] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
 
@@ -40,10 +34,6 @@ function ListProduct() {
   }, [setDataproduct]);
 
   console.log(dataproduct);
-  let { data: products, refetch } = useQuery("productsCache", async () => {
-    const response = await API.get("/products");
-    return response.data.data;
-  });
 
   const handleDelete = (id) => {
     setIdDelete(id);

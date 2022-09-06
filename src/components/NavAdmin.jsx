@@ -58,16 +58,18 @@ export default function NavAdmin() {
 
                   <Dropdown.Menu>
                     <Dropdown.Item>
-                      <img src={Add} alt='' onClick={movetoAddProduct} /> Add
-                      Product
+                      <img src={Add} alt='' />
+                      <span onClick={movetoAddProduct}>Add Product</span>
                     </Dropdown.Item>
                     <hr />
                     <Dropdown.Item>
-                      <img src={Add} alt='' onClick={movetoList} /> List Product
+                      <img src={Add} alt='' />
+                      <span onClick={movetoList}> List Product</span>
                     </Dropdown.Item>
                     <hr />
                     <Dropdown.Item>
-                      <img src={LogOut} alt='' onClick={handleLogout} /> Log Out
+                      <img src={LogOut} alt='' />
+                      <span onClick={handleLogout}>Log Out</span>
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

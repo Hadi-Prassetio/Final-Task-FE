@@ -4,13 +4,12 @@ import Pin from "../assets/pin.png";
 
 import NavAdmin from "../components/NavAdmin";
 import { useParams, useNavigate } from "react-router-dom";
-import Products from "../datadummies/Products";
 import { API } from "../config/api";
 import { useMutation, useQuery } from "react-query";
 
 function UpdateProduct() {
   const [preview, setPreview] = useState(null); //For image preview
-  const [product, setProduct] = useState({}); //Store product data
+
   const [dataproduct, setDataproduct] = useState([]);
   let navigate = useNavigate();
 

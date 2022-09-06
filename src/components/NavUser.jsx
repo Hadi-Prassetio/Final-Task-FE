@@ -66,12 +66,13 @@ export default function NavUser() {
 
                   <Dropdown.Menu>
                     <Dropdown.Item>
-                      <img src={Profile} alt='' onClick={movetoProfile} />{" "}
-                      Profile
+                      <img src={Profile} alt='' />
+                      <span onClick={movetoProfile}> Profile</span>
                     </Dropdown.Item>
                     <hr />
                     <Dropdown.Item>
-                      <img src={LogOut} alt='' onClick={handleLogout} /> Log Out
+                      <img src={LogOut} alt='' />{" "}
+                      <span onClick={handleLogout}>Log Out</span>
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
