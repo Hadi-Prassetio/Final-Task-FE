@@ -33,7 +33,7 @@ export default function NavUser() {
   return (
     <Navbar
       bg='light'
-      className='d-flex justify-content-beetween sticky-top'
+      className='d-flex justify-content-between sticky-top'
       style={{ boxShadow: "0px 5px 5px #888888" }}>
       <Container className='d-flex justify-content-beetween'>
         <div>

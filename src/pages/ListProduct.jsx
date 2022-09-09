@@ -86,7 +86,7 @@ function ListProduct() {
             return (
               <tbody>
                 <tr className='text-center'>
-                  <td className='align-middle text-center'>{item.id}</td>
+                  <td className='align-middle text-center'>{index + 1}</td>
                   <td className='align-middle'>
                     <img
                       src={item.image}

@@ -37,7 +37,7 @@ export default function NavAdmin() {
       bg='light'
       className='d-flex justify-content-beetween sticky-top'
       style={{ boxShadow: "0px 5px 5px #888888" }}>
-      <Container className='d-flex justify-content-beetween'>
+      <Container className='d-flex justify-content-between'>
         <div>
           <img src={Logo} onClick={movetoAdmin} />
         </div>
