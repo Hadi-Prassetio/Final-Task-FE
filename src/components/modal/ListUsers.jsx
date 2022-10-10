@@ -5,20 +5,18 @@ import { API } from "../../config/api";
 export default function ListUsers() {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [Users, setUsers] = useState([]);
+  const handleClose = () => setShow(false);
 
+  const [users, setUsers] = useState([]);
   useEffect(() => {
-    const Users = async () => {
+    const users = async () => {
       try {
         const response = await API.get("/users");
         setUsers(response.data.data);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     };
-    Users();
+    users();
   }, [setUsers]);
 
   return (
@@ -51,7 +49,7 @@ export default function ListUsers() {
               </tr>
             </thead>
             <tbody>
-              {Users?.map((item, index) => (
+              {users?.map((item, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{item?.email}</td>

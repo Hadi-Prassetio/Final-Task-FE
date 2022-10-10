@@ -25,7 +25,7 @@ export default function Transaction() {
   return (
     <div>
       {transactions?.lenght != 0 ? (
-        <div>
+        <div style={{ width: "600px", height: "300px", overflow: "scroll" }}>
           {transactions?.map((items, index) => (
             <Container
               className='p-4 overflow-auto rounded-4 mb-2 '

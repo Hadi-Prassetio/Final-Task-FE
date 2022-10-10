@@ -145,11 +145,11 @@ export default function Cart() {
               <p className='mt-5' style={{ color: "#613D2B" }}>
                 Review Your Order
               </p>
-              {transaction?.length != 0 ? (
+              {transaction?.carts?.length != 0 ? (
                 <Row>
                   <Col md={8}>
                     <hr />
-                    {transaction?.carts.map((item, index) => (
+                    {transaction?.carts?.map((item, index) => (
                       <Row style={{ fontSize: 14 }}>
                         <Col md={8} className='d-flex'>
                           <div

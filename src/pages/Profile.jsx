@@ -49,8 +49,7 @@ export default function Profile() {
             <h2 className='mb-4' style={{ color: "#613D2B" }}>
               My Transaction
             </h2>
-            <div
-              style={{ width: "600px", height: "300px", overflow: "scroll" }}>
+            <div>
               <Transaction />
             </div>
           </Col>
